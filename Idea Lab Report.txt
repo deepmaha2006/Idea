@@ -1,0 +1,1070 @@
+﻿Partial theft detection with sensors and alert 
+modules 
+
+A Project Report submitted in partial fulfilment of the requirements of 
+The award of the degree of 
+
+ 
+Bachelor of Technology 
+
+in 
+CSE (Cyber Security) 
+
+by 
+
+Ankit Kumar, PCEA24CY010 
+
+Ankit Kumar, PCEA24CY011 
+
+Deepesh Kumar Mahawar, PCEA24CY020 
+
+Under the guidance of 
+Dr. Rajesh Kumar Bathija 
+
+Assistant Professor 
+Department of Advance Computing 
+
+ 
+
+ 
+ 
+
+(Session 2025-26) 
+
+Department of Advance Computing 
+Poornima College of Engineering 
+
+ISI-6, RIICO Institutional Area, Sitapura, Jaipur – 302022 
+
+April, 2026 
+
+
+
+ACKNOWLEDGEMENT 
+
+I would like to convey my profound sense of respect and admiration to my supervisor Dr. Rajesh 
+
+Kumar Bathija, Assistant Professor, Department of Advance Computing, Poornima College 
+
+of Engineering, for her constant concern, attention, invaluable direction, guidance, and 
+
+encouragement throughout this project work. 
+
+I am grateful to Dr. Mahesh Bundele, Principal and Director, and Dr. Pankaj Dhemla, Vice-
+
+Principal, Poornima College of Engineering, for providing the necessary resources and a 
+
+conducive environment to carry out this project. 
+
+My special heartfelt gratitude goes to Dr. Amol Saxena, HOD, and Dr. Kamlesh Gautam, Dy. 
+
+HOD, Department of Advance Computing, for their constant support, guidance, and motivation 
+
+during the course of this project work. 
+
+I would like to express my deep sense of gratitude towards the management of Poornima College 
+
+of Engineering, including Shri Shashikant Singhi, Chairman, Poornima Group, Mr. M. K. 
+
+M. Shah, Director General, Poornima Group, and Ar. Rahul Singhi, Director, Poornima 
+
+Group, for providing all the necessary resources and facilities required to successfully complete 
+
+this project. 
+
+I take this opportunity to express my sincere thanks to all faculty members of the department for 
+
+their kind support, technical guidance, and inspiration throughout the course. 
+
+I am also thankful to the non-teaching staff of the department for their support in the preparation 
+
+of this dissertation work. 
+
+I am deeply thankful to my parents and all other family members for their blessings and 
+
+inspiration. Last but not least, I offer my sincere thanks to God, who enabled me to complete my 
+
+dissertation on time. 
+
+ 
+
+Deepesh Kumar Mahawar, Reg No: PCEA24CY020 
+
+ ii 
+
+
+
+TABLE OF CONTENTS 
+ 
+
+S. No. Section Title Page No. 
+
+1. Acknowledgement ii 
+
+2. Abstract 1 
+
+3. Introduction 2 
+
+4. Problem Statement 3 
+
+5. Objectives of the Project 4 
+
+6. Research Methodology 6 
+
+7. System Architecture 7 
+
+8. Hardware Components 8 
+
+9. Software Components 10 
+
+10. Working Principle 11 
+
+11. Algorithm 12 
+
+12. Advantages 14 
+
+13. Limitations 14 
+
+14. Applications 15 
+
+15. Future Scope 15 
+
+16. Conclusion 16 
+
+17. References 16 
+
+ 
+
+ iii 
+
+
+
+ABSTRACT 
+
+Partial theft has emerged as a significant yet often unnoticed challenge in modern warehouse 
+
+management, logistics operations, and inventory control systems. Unlike complete theft, which 
+
+involves the removal of entire goods or assets and is easily detectable, partial theft refers to the 
+
+gradual and unauthorized removal of items in small quantities over time. This type of theft is 
+
+particularly difficult to identify using traditional security systems, as it does not trigger standard 
+
+alarms such as forced entry detection or perimeter breach alerts. 
+
+The proposed project, “Partial Theft Detection with Sensors and Alert Modules,” presents 
+
+an advanced IoT-based solution designed to address this gap in security systems. The system 
+
+integrates multiple sensing technologies, including load cells for weight measurement, infrared 
+
+sensors for presence detection, magnetic reed switches for tamper detection, and vibration 
+
+sensors for identifying physical disturbances. These sensors work collaboratively through a 
+
+concept known as multi-sensor fusion, which enhances detection accuracy and minimizes false 
+
+negatives. 
+
+A microcontroller, such as Arduino Uno or NodeMCU, serves as the central processing unit of 
+
+the system. It continuously collects and analyses data from all connected sensors and applies 
+
+predefined threshold logic to detect anomalies. When a suspicious event is identified—such as a 
+
+drop in weight beyond a specified limit or unauthorized opening of a storage container—the 
+
+system immediately triggers alert mechanisms. 
+
+The alert system consists of both local and remote notification methods. Locally, the system uses 
+
+buzzers, LEDs, and LCD displays to provide instant feedback to nearby personnel. Remotely, it 
+
+utilizes GSM modules for SMS alerts and WiFi modules for cloud-based monitoring, enabling 
+
+real-time notifications regardless of location. 
+
+This project demonstrates that by combining low-cost hardware components with IoT 
+
+technology, it is possible to build a highly effective, scalable, and reliable system for detecting 
+
+partial theft. The solution is particularly beneficial for warehouses, retail storage units, and 
+
+supply chain environments, where even minor losses can accumulate into significant financial 
+
+damage over time. 
+
+ 
+
+      
+
+  
+
+
+
+INTRODUCTION 
+
+In today’s rapidly evolving industrial and commercial environments, ensuring the security of goods 
+
+and assets is of paramount importance. Warehouses, retail stores, and logistics hubs rely heavily on 
+
+inventory management systems to track and safeguard products. However, while significant 
+
+advancements have been made in detecting large-scale theft and unauthorized access, one critical issue 
+
+remains largely unaddressed—partial theft. 
+
+Partial theft refers to the unauthorized removal of a portion of goods rather than the entire stock. This 
+
+type of theft is often carried out gradually, making it difficult to detect through conventional security 
+
+measures. Traditional systems such as CCTV cameras, alarm systems, and access control mechanisms 
+
+are primarily designed to detect visible breaches or complete removal of assets. As a result, small and 
+
+incremental losses often go unnoticed until periodic inventory audits are conducted. 
+
+The inability to detect partial theft in real time leads to several challenges. Organizations may 
+
+experience financial losses, inaccurate inventory records, and operational inefficiencies. In some cases, 
+
+insider threats contribute significantly to such thefts, as employees may exploit the lack of monitoring 
+
+systems for small-scale removals. 
+
+To overcome these challenges, the proposed system introduces a sensor-based intelligent monitoring 
+
+solution. The system employs multiple sensors to track different aspects of the storage environment: 
+
+ Weight monitoring to detect changes in stored goods  
+
+ Presence detection to confirm object availability  
+
+ Tamper detection to identify unauthorized access  
+
+ Vibration sensing to capture physical disturbances  
+
+By combining these sensors, the system creates a multi-layered security approach that significantly 
+
+improves detection accuracy. 
+
+Furthermore, the integration of Internet of Things (IoT) technology enhances the system’s 
+
+capabilities by enabling real-time communication and remote monitoring. Users can receive alerts 
+
+through mobile devices, cloud platforms, or SMS notifications, ensuring immediate awareness of any 
+
+suspicious activity. 
+
+This project represents a shift from traditional reactive security systems to proactive and intelligent 
+
+monitoring solutions, capable of identifying even the smallest irregularities in inventory handling. 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+
+
+PROBLEM STATEMENT 
+
+Partial theft is a critical and often overlooked issue in inventory management and 
+
+security systems, especially in large-scale environments such as warehouses, 
+
+distribution centres, and retail storage units. Unlike full-scale theft, which involves 
+
+immediate and noticeable removal of goods, partial theft occurs gradually in small 
+
+quantities and often goes undetected for long periods. This makes it difficult to identify 
+
+and control using traditional security methods. 
+
+One of the major challenges is the gradual removal of items, where small quantities are 
+
+taken over time. Although each instance may appear insignificant, the cumulative effect 
+
+results in substantial financial losses. Additionally, there is a lack of real-time detection, 
+
+as conventional systems rely on periodic inventory checks or audits, leading to delayed 
+
+identification of theft. 
+
+Traditional security systems such as CCTV cameras, alarm systems, and access control 
+
+mechanisms are primarily designed to detect major breaches or unauthorized entry. 
+
+However, they are ineffective in identifying subtle changes such as minor weight 
+
+reduction or partial removal of goods. Furthermore, insider threats pose a significant 
+
+risk, as individuals with authorized access can exploit system limitations without 
+
+raising suspicion. 
+
+Another major issue is inventory mismatch and financial loss, where discrepancies arise 
+
+between recorded and actual stock levels, affecting supply chain efficiency, order 
+
+fulfillment, and financial accounting. Moreover, the lack of automated monitoring 
+
+systems increases dependency on manual supervision, which is both time-consuming 
+
+and prone to human error. 
+
+To address these challenges, there is a clear need for an advanced system that can 
+
+continuously monitor inventory in real time, detect even minor changes in stored goods, 
+
+and provide instant alerts. The system should operate autonomously and integrate 
+
+multiple detection mechanisms to improve accuracy and reliability. 
+
+The proposed Partial Theft Detection System using Sensors and Alert Modules fulfills 
+
+these requirements by combining sensor technology with IoT-based communication. 
+
+This approach ensures real-time monitoring, accurate detection, and immediate 
+
+notification, making it an effective and efficient solution for modern inventory security 
+
+systems. 
+
+ 
+ 
+
+
+
+OBJECTIVES OF THE PROJECT 
+
+The main objective of this project is to design and develop a smart, reliable, and real-
+
+time system capable of detecting partial theft using multiple sensors and alert 
+
+mechanisms. The system focuses on identifying even small irregularities in stored 
+
+goods and providing instant alerts. 
+
+ 
+
+4.1 Real-Time Detection 
+
+To develop a system that continuously monitors goods and detects theft instantly, 
+
+reducing delays and preventing further losses. 
+
+ 
+
+4.2 Multi-Sensor Integration 
+
+To use multiple sensors such as load cell, IR/ultrasonic sensor, reed switch, and 
+
+vibration sensor to improve accuracy and reduce false detection. 
+
+ 
+
+4.3 Intelligent Decision Making 
+
+To design a system that analyzes sensor data, compares it with predefined thresholds, 
+
+and identifies abnormal conditions efficiently. 
+
+ 
+
+4.4 Multi-Level Alert System 
+
+To provide both local alerts (buzzer, LED, LCD) and remote alerts (SMS and cloud) 
+
+for immediate response and monitoring. 
+
+ 
+
+4.5 IoT-Based Monitoring 
+
+To enable remote monitoring using IoT technology, allowing users to access real-time 
+
+data and alerts from anywhere. 
+
+ 
+
+4.6 Cost-Effective Solution 
+
+To develop a low-cost system using easily available components, making it affordable 
+
+and practical for wide usage. 
+
+ 
+
+ 
+ 
+
+
+
+4.7 Scalability and Flexibility 
+
+To design a modular system that can be easily expanded from small setups to large 
+
+warehouse environments. 
+
+ 
+
+4.8 Reliability and Accuracy 
+
+To minimize false alarms by using proper sensor calibration, threshold logic, and multi-
+
+sensor verification. 
+
+ 
+
+4.9 Enhanced Security 
+
+To improve inventory security by detecting theft at an early stage and reducing financial 
+
+losses. 
+
+              
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+
+
+RESEARCH METHODOLOGY  
+
+5.1 Problem Identification 
+
+The problem of partial theft was identified as it is not detected by traditional systems, 
+
+occurs gradually, and lacks real-time monitoring. This created the need for an 
+
+automated detection system. 
+
+5.2 Requirement Analysis 
+
+System requirements were defined as: 
+
+ Functional: Detect weight change, tampering, object presence, and generate alerts with 
+
+notifications.  
+
+ Non-Functional: Ensure low cost, reliability, ease of use, and scalability.  
+
+5.3 System Design Approach 
+
+A modular design was used with four layers: sensing, processing, alert, and 
+
+communication. This improves flexibility, maintenance, and future upgrades. 
+
+5.4 Component Selection 
+
+Components were chosen based on cost, accuracy, availability, and compatibility, such 
+
+as Arduino, HX711, and ESP8266. 
+
+5.5 Hardware Implementation 
+
+Sensors were connected to the microcontroller, load cell was configured, alert modules 
+
+were added, and proper power supply setup was ensured. 
+
+5.6 Software Development 
+
+The system was programmed using Arduino IDE. It reads sensor data, applies logic, 
+
+triggers alerts, and sends notifications. 
+
+5.7 Testing and Calibration 
+
+The system was tested for accuracy, threshold settings, and noise reduction. Calibration 
+
+ensured proper weight measurement and reliable detection. 
+
+ 
+
+5.8 Result Analysis 
+
+The system was evaluated based on accuracy, response time, and reliability, showing 
+
+effective detection of partial theft with minimal errors. 
+
+ 
+
+ 
+ 
+
+
+
+SYSTEM ARCHITECTURE  
+
+6.1 Overview of System Architecture 
+
+The Partial Theft Detection System is based on a modular design that integrates sensing, 
+
+processing, alert, and communication components. The microcontroller acts as the 
+
+central unit, collecting data from sensors, analyzing it, and triggering alerts when any 
+
+abnormal activity is detected. 
+
+ 
+
+6.2 Block Diagram Explanation 
+
+The system is divided into four main layers: 
+
+1. Sensing Layer 
+
+This layer collects real-time data using sensors such as load cell, IR sensor, ultrasonic 
+
+sensor, reed switch, and vibration sensor to detect weight changes, object presence, and 
+
+tampering. 
+
+ 
+
+2. Processing Layer 
+
+The microcontroller (Arduino/NodeMCU) processes sensor data, converts signals, 
+
+applies threshold logic, and identifies abnormal conditions. 
+
+ 
+
+3. Alert Layer 
+
+This layer provides immediate alerts using buzzer (sound), LED (visual), and LCD 
+
+(display) to notify nearby users. 
+
+ 
+
+4. Communication Layer 
+
+GSM and WiFi modules are used to send SMS alerts and cloud notifications for remote 
+
+monitoring. 
+
+ 
+
+6.3 Key Features of Architecture 
+
+The system offers real-time monitoring, multi-sensor accuracy, modular and scalable 
+
+design, and reliable communication through both local and remote alert systems. 
+
+ 
+
+ 
+ 
+
+
+
+HARDWARE COMPONENTS  
+
+7.1 Microcontroller (Arduino Uno / NodeMCU) 
+
+The microcontroller is the central unit that controls the entire system. It reads sensor 
+
+data, processes it using programmed logic, and activates alerts or communication 
+
+modules when abnormal conditions are detected. 
+
+ 
+
+7.2 Weight Sensor (Load Cell + HX711) 
+
+The load cell measures the weight of stored items, while the HX711 converts the signal 
+
+into digital form. The system compares current weight with a baseline value and triggers 
+
+an alert if a significant change is detected. 
+
+ 
+
+7.3 IR Sensor 
+
+The IR sensor detects the presence or absence of objects by using infrared light. It helps 
+
+in identifying item removal and supports theft detection. 
+
+ 
+
+7.4 Ultrasonic Sensor 
+
+This sensor measures distance using sound waves. It is used to detect changes in object 
+
+position or identify if items have been removed. 
+
+ 
+
+7.5 Magnetic Reed Switch 
+
+The reed switch detects whether a lid or container is opened or closed. It triggers an 
+
+alert immediately when unauthorized access is detected. 
+
+ 
+
+7.6 Vibration Sensor 
+
+This sensor detects physical movement or disturbances. It helps identify tampering or 
+
+forced handling of the storage unit. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+
+
+7.7 Alert Modules 
+
+The system uses buzzer, LED, and LCD for local alerts. The buzzer provides sound 
+
+alerts, LED indicates system status, and LCD displays information such as weight and 
+
+alert messages. 
+
+ 
+
+7.8 Communication Modules 
+
+The GSM module sends SMS alerts, while the WiFi module enables cloud connectivity 
+
+and remote monitoring through IoT platforms. 
+
+ 
+
+7.9 Power Supply 
+
+The system is powered using a battery or adapter with a voltage regulator to ensure 
+
+stable and continuous operation. 
+
+       
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+
+
+SOFTWARE COMPONENTS  
+
+8.1 Introduction 
+
+The software controls all system operations, processes sensor data, and triggers alerts. 
+
+It is developed using Embedded C in the Arduino IDE, providing a simple and efficient 
+
+platform for microcontroller programming. 
+
+ 
+
+8.2 Development Environment 
+
+The Arduino IDE is used for programming, offering easy code uploading, serial 
+
+monitoring, and library support for sensors and communication modules like HX711, 
+
+GSM, and WiFi. 
+
+ 
+
+8.3 Programming Language 
+
+Embedded C is used to implement system logic, handle input/output operations, and 
+
+ensure fast and efficient execution. 
+
+ 
+
+8.4 Software Modules 
+
+ Sensor Reading Module: Collects data from load cell, IR, ultrasonic, reed switch, and 
+
+vibration sensors.  
+
+ Data Processing Module: Processes sensor data, applies calibration, and filters noise.  
+
+ Decision-Making Module: Uses logic to detect conditions like weight drop, lid 
+
+opening, or tampering.  
+
+ Alert Control Module: Activates buzzer, LED, and LCD when theft is detected.  
+
+ Communication Module: Sends SMS alerts via GSM and data to cloud via WiFi.  
+
+ 
+
+8.5 Sensor Calibration 
+
+Calibration ensures accuracy by setting baseline weight, defining thresholds, and 
+
+removing noise from sensor readings. 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+
+
+WORKING PRINCIPLE 
+
+9.1 System Initialization 
+
+When powered ON, the microcontroller initializes all sensors and records the baseline 
+
+weight for comparison. 
+
+ 
+
+9.2 Continuous Monitoring 
+
+The system continuously monitors weight, lid status, object presence, and vibrations 
+
+using different sensors. 
+
+ 
+
+9.3 Data Processing 
+
+Sensor data is processed by the microcontroller, compared with baseline values, and 
+
+evaluated using threshold logic. 
+
+ 
+
+9.4 Detection Conditions 
+
+The system detects theft if there is a significant weight drop, lid opening, object 
+
+removal, or unusual vibration. 
+
+ 
+
+9.5 Decision Making 
+
+If any abnormal condition is detected, the system confirms theft. Detection becomes 
+
+more reliable when multiple sensors trigger. 
+
+ 
+
+9.6 Alert Generation 
+
+Once theft is detected, the system activates buzzer, LED, and LCD for local alerts, and 
+
+sends SMS or cloud notifications for remote alerts. 
+
+ 
+
+9.7 System Reset 
+
+After alert generation, the system returns to monitoring mode and can be reset manually 
+
+or automatically. 
+
+ 
+
+ 
+ 
+
+ 
+
+
+
+ALGORITHM  
+
+10.1 Step-by-Step Algorithm 
+
+1. Start the system  
+
+2. Initialize sensors and set baseline weight  
+
+3. Continuously read sensor data  
+
+4. Compare current values with threshold conditions  
+
+5. If any abnormal condition is detected:  
+
+a. Trigger alert  
+
+b. Send notification  
+
+6. Else continue monitoring  
+
+7. Repeat the process  
+
+ 
+
+10.2 Pseudocode 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+
+
+10.3 Flowchart Explanation 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+
+
+Advantages 
+
+ Real-time detection: The system continuously monitors and detects theft instantly 
+
+without waiting for manual checks.  
+
+ Detection of partial theft: Even small or gradual removal of items can be identified 
+
+using weight and presence sensors.  
+
+ Multi-sensor accuracy: Using multiple sensors together increases reliability and 
+
+reduces chances of incorrect detection.  
+
+ Dual alert system: Provides both local alerts (buzzer, LED) and remote alerts 
+
+(SMS/cloud) for quick response.  
+
+ Cost-effective solution: Built using affordable components like Arduino and basic 
+
+sensors, making it budget-friendly.  
+
+ Easy installation: Simple design allows easy setup and maintenance without complex 
+
+infrastructure.  
+
+ Scalable system: Can be expanded from a single box to large warehouse systems easily.  
+
+ IoT integration: Enables remote monitoring and data tracking through internet 
+
+connectivity.  
+
+ 
+
+Limitations 
+
+ Sensor calibration required: Accurate working depends on proper calibration, 
+
+especially for load cell.  
+
+ False alarms possible: Environmental factors like vibrations or noise may trigger 
+
+unwanted alerts.  
+
+ Network dependency: Remote alerts depend on GSM/WiFi availability, which may 
+
+not always be stable.  
+
+ Power dependency: Requires continuous power supply; failure can stop the system.  
+
+ Limited sensor range: Some sensors work only within a specific distance, limiting 
+
+large-area coverage.  
+
+ Maintenance required: Sensors and hardware components may need regular checking 
+
+and replacement.  
+
+  
+
+ 
+ 
+
+
+
+Applications 
+
+ Warehouses: Helps monitor stored goods and detect any unauthorized removal. 
+
+ Logistics & supply chain: Ensures safety of goods during storage and transportation. 
+
+ Retail storage: Prevents internal theft and keeps track of inventory. 
+
+ Smart homes: Can be used to protect personal valuables and storage units. 
+
+ Industrial storage: Secures raw materials and equipment from unauthorized use. 
+
+ Banks & lockers: Detects tampering or unauthorized access in secure storage areas. 
+
+ 
+
+Future Scope 
+
+ AI-based detection: Machine learning can be used to predict theft patterns and improve 
+
+accuracy.  
+
+ Mobile app integration: Users can monitor and control the system directly from their 
+
+smartphones.  
+
+ Cloud analytics: Data can be stored and analyzed for better decision-making and 
+
+reporting.  
+
+ CCTV integration: Combining with cameras can provide visual proof of theft events.  
+
+ GPS tracking: Useful for tracking goods in transit and preventing loss during 
+
+transportation.  
+
+ Blockchain security: Ensures secure and tamper-proof storage of inventory data. 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+
+
+CONCLUSION  
+
+The project “Partial Theft Detection with Sensors and Alert Modules” successfully 
+
+addresses one of the most overlooked challenges in security systems—detecting 
+
+gradual and partial theft. Traditional systems are primarily designed to detect major 
+
+theft incidents and often fail to identify small but continuous losses that can accumulate 
+
+into significant damage over time. 
+
+This project demonstrates that by integrating multiple sensors such as load cells, IR 
+
+sensors, reed switches, and vibration sensors, it is possible to create a robust and 
+
+intelligent detection system. The concept of multi-sensor fusion enhances accuracy and 
+
+ensures that no suspicious activity goes unnoticed. 
+
+The use of a microcontroller enables real-time processing of sensor data and immediate 
+
+decision-making. Additionally, the inclusion of both local alert systems (buzzer, LED, 
+
+LCD) and remote communication (GSM and WiFi) ensures that users are notified 
+
+instantly, regardless of their location. 
+
+One of the major strengths of this system is its cost-effectiveness and scalability. It can 
+
+be implemented in small storage units as well as expanded to large warehouse 
+
+environments with minimal modifications. 
+
+Overall, this project provides a practical, efficient, and modern solution for improving 
+
+inventory security. It highlights the importance of IoT-based systems in transforming 
+
+traditional security approaches into smart and proactive monitoring solutions 
+
+ 
+
+REFERENCES 
+
+ Arduino Official Documentation  
+
+ ESP8266 WiFi Module Documentation  
+
+ HX711 Load Cell Amplifier Datasheet  
+
+ GSM SIM800L Module Documentation  
+
+ IoT Platforms:  
+
+o Blynk  
+
+o ThingSpeak
